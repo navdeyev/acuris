@@ -10,28 +10,32 @@ describe('CompanyList', () => {
     props = {
       companies: [
         {
-          id: "1",
-          name: "Sony Corporation",
-          description: "Japan-based company engaged in businesses of consumer and professional electronics, gaming, entertainment and financial services",
+          id: '1',
+          name: 'Sony Corporation',
+          description: 'Japan-based company engaged in businesses of consumer and professional electronics, gaming, entertainment and financial services',
           isListedEntity: true,
           isPEVCHouse: true,
           geography: {
-            country: "Japan",
-            state: "Kanto"
+            country: 'Japan',
+            state: 'Kanto'
           }
         }, {
-          id: "2",
-          name: "Sony Music Entertainment Inc.",
-          description: "US-based music publishing company",
+          id: '2',
+          name: 'Sony Music Entertainment Inc.',
+          description: 'US-based music publishing company',
           isListedEntity: false,
           isPEVCHouse: false,
           geography: {
-            country: "USA",
-            state: "New York (NY)"
+            country: 'USA',
+            state: 'New York (NY)'
           }
         }
       ]
     };
+  });
+
+  it('renners nothing if company list is empty', () => {
+    expect(CompanyList({companies: []})).toBe(null);
   });
 
   it('renders a row for every company', () => {

@@ -1,23 +1,68 @@
-import React, {Component} from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
 import './App.css';
 
 import CompanyList from "./components/CompanyList";
-import companies from './assets/company.json';
+import appActions from './appActions';
+import {PAGE_SIZE} from './Page';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="filter">
-          <input type="text" className="filterInput" placeholder="Start typing to filter by Company name" />
-        </div>
-        <CompanyList companies={companies} />
-        <div className="showMoreContainer">
-          <a className="showMore" href="#">Show more</a>
-        </div>
+export const App = (props) => {
+  const {companyName, page, updateCompanyName, applyFilter} = props;
+
+  const filterHandler = (e) => {
+    const inputValue = e.target.value;
+    updateCompanyName(inputValue);
+    applyFilter(inputValue.length > 2 ? inputValue : '', page.pageNumber);
+  };
+
+  const clearFilter = () => {
+    updateCompanyName('');
+    applyFilter('', 0);
+  };
+
+  const showMore = (e) => {
+    e.preventDefault();
+
+    const hasNextPage = (page.pageNumber + 1) * PAGE_SIZE < page.totalItems;
+    if (hasNextPage) {
+      applyFilter(companyName, page.pageNumber + 1);
+    }
+  };
+
+  return (
+    <div className="app">
+      <div className="filter">
+        <input type="text"
+               className="filterInput"
+               value={companyName}
+               onChange={filterHandler}
+               data-role="filter-input"
+               placeholder="Start typing to filter by Company name"/>
+        <button type="button" onClick={clearFilter} className="clearButton" data-role="clear-button">
+          Clear filter
+        </button>
       </div>
-    );
-  }
-}
+      <CompanyList companies={page.items}/>
+      {
+        page.totalItems > PAGE_SIZE &&
+        <div className="showMoreContainer">
+          <a className="showMore" href="#" onClick={showMore} data-role="show-more-link">Show more</a>
+        </div>
+      }
+    </div>
+  );
+};
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    page: state.page,
+    companyName: state.companyName
+  };
+};
+
+const mapDispatchToProps = {
+  updateCompanyName: appActions.updateCompanyName,
+  applyFilter: appActions.applyFilter
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

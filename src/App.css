@@ -1,4 +1,4 @@
-.App {
+.app {
   max-width: 960px;
   margin: 0 auto;
   padding: 40px 0;
@@ -11,6 +11,11 @@
 .filterInput {
   width: 300px;
   padding: 5px 10px;
+}
+
+.clearButton {
+  padding: 5px;
+  margin-left: 10px;
 }
 
 .showMoreContainer {

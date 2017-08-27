@@ -2,21 +2,27 @@ import React from 'react';
 
 import './CompanyList.css'
 
-const CompanyList = ({companies}) => {
-  return (
-    <table className="companyList">
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Headquarter</th>
-      </tr>
-      </thead>
-      <tbody>
-      {companies.map((company, index) => renderCompanyRow(company, index))}
-      </tbody>
-    </table>
-  );
+const CompanyList = (props) => {
+  const {companies} = props;
+
+  if (companies && companies.length > 0) {
+    return (
+      <table className="companyList">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Headquarter</th>
+        </tr>
+        </thead>
+        <tbody>
+        {companies.map(renderCompanyRow)}
+        </tbody>
+      </table>
+    );
+  }
+
+  return null;
 };
 
 const renderCompanyRow = (company, index) => {
