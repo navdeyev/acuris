@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {appActionTypes} from './appActions';
-import filterService from './filterService';
-import Page from './Page';
+import filterService from '../services/filterService';
+import Page from '../services/Page';
 
 export const companyName = (state = '', action) => {
   if (appActionTypes.UPDATE_COMPANY_NAME === action.type) {

@@ -1,7 +1,7 @@
 import {companyName, page} from './appReducers';
 import {appActionTypes} from './appActions';
-import Page from './Page';
-import filterService from './filterService';
+import Page from '../services/Page';
+import filterService from '../services/filterService';
 
 describe('companyName', () => {
 

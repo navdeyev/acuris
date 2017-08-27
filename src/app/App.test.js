@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {App} from './App';
-import {PAGE_SIZE} from './Page';
+import {PAGE_SIZE} from '../services/Page';
 
 describe('App', () => {
 
@@ -73,10 +73,8 @@ describe('App', () => {
     props.page = {items: [], totalItems: PAGE_SIZE + 2, pageNumber: 0};
     const appWrapper = shallow(<App {...props} />);
     const showMoreLink = appWrapper.find('[data-role="show-more-link"]');
-    const event = {preventDefault: jest.fn()};
-    showMoreLink.simulate('click', event);
+    showMoreLink.simulate('click');
 
-    expect(event.preventDefault).toHaveBeenCalled();
     expect(props.applyFilter).toHaveBeenCalledWith(props.companyName, 1);
   });
 
@@ -84,10 +82,8 @@ describe('App', () => {
     props.page = {items: [], totalItems: PAGE_SIZE + 2, pageNumber: 1};
     const appWrapper = shallow(<App {...props} />);
     const showMoreLink = appWrapper.find('[data-role="show-more-link"]');
-    const event = {preventDefault: jest.fn()};
-    showMoreLink.simulate('click', event);
+    showMoreLink.simulate('click');
 
-    expect(event.preventDefault).toHaveBeenCalled();
     expect(props.applyFilter).not.toHaveBeenCalled();
   });
 

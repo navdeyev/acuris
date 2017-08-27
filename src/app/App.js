@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './App.css';
 
-import CompanyList from "./components/CompanyList";
+import CompanyList from "../components/CompanyList";
 import appActions from './appActions';
-import {PAGE_SIZE} from './Page';
+import {PAGE_SIZE} from '../services/Page';
 
 export const App = (props) => {
   const {companyName, page, updateCompanyName, applyFilter} = props;
@@ -20,9 +20,7 @@ export const App = (props) => {
     applyFilter('', 0);
   };
 
-  const showMore = (e) => {
-    e.preventDefault();
-
+  const showMore = () => {
     const hasNextPage = (page.pageNumber + 1) * PAGE_SIZE < page.totalItems;
     if (hasNextPage) {
       applyFilter(companyName, page.pageNumber + 1);
@@ -46,7 +44,7 @@ export const App = (props) => {
       {
         page.totalItems > PAGE_SIZE &&
         <div className="showMoreContainer">
-          <a className="showMore" href="#" onClick={showMore} data-role="show-more-link">Show more</a>
+          <a className="showMore" href="javascript:void(0);" onClick={showMore} data-role="show-more-link">Show more</a>
         </div>
       }
     </div>

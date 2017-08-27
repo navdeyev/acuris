@@ -34,7 +34,7 @@ describe('CompanyList', () => {
     };
   });
 
-  it('renners nothing if company list is empty', () => {
+  it('renders nothing if company list is empty', () => {
     expect(CompanyList({companies: []})).toBe(null);
   });
 

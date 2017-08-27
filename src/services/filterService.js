@@ -1,4 +1,4 @@
-import unfilteredCompanies from './assets/company.json';
+import unfilteredCompanies from '../assets/company.json';
 
 import Page, { PAGE_SIZE } from './Page';
 
@@ -26,6 +26,5 @@ export const applyFilteringAndPagingFactory = (unfilteredCompanies) => {
 };
 
 export default {
-  applyFiltering,
   applyFilteringAndPaging: applyFilteringAndPagingFactory(unfilteredCompanies)
 }
