@@ -1,0 +1,31 @@
+.companyList {
+  width: 100%;
+  border-collapse: collapse;
+}
+.companyList > thead > tr > th {
+  text-align: left;
+  padding: 10px 15px;
+  font-weight: normal;
+  border: 1px solid #000;
+  background-color: #ccc;
+}
+
+.companyList > tbody > tr > td {
+  padding: 10px 15px;
+  vertical-align: top;
+  border: 1px solid #000;
+}
+.companyList > tbody > tr > td.nameCell > .name {
+  font-size: 20px;
+}
+.companyList > tbody > tr > td.nameCell > .description {
+  font-size: 12px;
+}
+
+.companyList > tbody > tr > .typeCell {
+  width: 200px;
+}
+
+.companyList > tbody > tr > .headquarterCell {
+  width: 200px;
+}
