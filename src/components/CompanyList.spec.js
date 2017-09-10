@@ -16,8 +16,7 @@ describe('CompanyList', () => {
           isListedEntity: true,
           isPEVCHouse: true,
           geography: {
-            country: 'Japan',
-            state: 'Kanto'
+            country: 'Japan'
           }
         }, {
           id: '2',
@@ -68,7 +67,7 @@ describe('CompanyList', () => {
     const wrapper = shallow(<CompanyList {...props} />);
 
     const corporationHeadquartersWrapper = wrapper.find('[data-role="company-row-headquarters-0"]');
-    expect(corporationHeadquartersWrapper.text()).toBe('Kanto, Japan');
+    expect(corporationHeadquartersWrapper.text()).toBe('Japan');
 
     const musicEntertainmentHeadquartersWrapper = wrapper.find('[data-role="company-row-headquarters-1"]');
     expect(musicEntertainmentHeadquartersWrapper.text()).toBe('New York (NY), USA');

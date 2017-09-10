@@ -25,6 +25,13 @@ const CompanyList = (props) => {
   return null;
 };
 
+const composeHeadquarters = (geography) => {
+  if (geography.state) {
+    return `${geography.state}, ${geography.country}`
+  }
+  return geography.country;
+};
+
 const renderCompanyRow = (company, index) => {
   return (
     <tr key={company.id} data-role="company-row">
@@ -38,7 +45,7 @@ const renderCompanyRow = (company, index) => {
       </td>
       <td className="headquarterCell">
         <span data-role={`company-row-headquarters-${index}`}>
-          {`${company.geography.state}, ${company.geography.country}`}
+          { composeHeadquarters(company.geography) }
         </span>
       </td>
     </tr>

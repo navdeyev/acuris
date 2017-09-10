@@ -19,5 +19,9 @@
 }
 
 .showMoreContainer {
-  padding: 10px 0 0 15px;
+  padding: 10px 0 0 0;
+}
+
+.showMoreContainer > a {
+  margin-left: 15px;
 }

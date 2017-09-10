@@ -20,10 +20,17 @@ export const App = (props) => {
     applyFilter('', 0);
   };
 
-  const showMore = () => {
+  const nextPage = () => {
     const hasNextPage = (page.pageNumber + 1) * PAGE_SIZE < page.totalItems;
     if (hasNextPage) {
       applyFilter(companyName, page.pageNumber + 1);
+    }
+  };
+
+  const prevPage = () => {
+    const hasPrevPage = page.pageNumber !== 0;
+    if (hasPrevPage) {
+      applyFilter(companyName, page.pageNumber - 1);
     }
   };
 
@@ -41,12 +48,16 @@ export const App = (props) => {
         </button>
       </div>
       <CompanyList companies={page.items}/>
-      {
-        page.totalItems > PAGE_SIZE &&
         <div className="showMoreContainer">
-          <a className="showMore" href="javascript:void(0);" onClick={showMore} data-role="show-more-link">Show more</a>
+          {
+            page.pageNumber !== 0 &&
+            <a href="javascript:void(0);" onClick={prevPage} data-role="prev-page-link">Prev page</a>
+          }
+          {
+            page.totalItems > PAGE_SIZE && page.pageNumber !== Math.floor(page.totalItems / PAGE_SIZE) &&
+            <a href="javascript:void(0);" onClick={nextPage} data-role="next-page-link">Next page</a>
+          }
         </div>
-      }
     </div>
   );
 };

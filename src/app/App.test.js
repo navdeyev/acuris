@@ -56,35 +56,53 @@ describe('App', () => {
     expect(props.applyFilter).toHaveBeenCalledWith('', 0);
   });
 
-  it('hides \'show more\' link if all items fit on one page', () => {
+  it('hides \'next page\' link if all items fit on one page', () => {
     const appWrapper = shallow(<App {...props} />);
-    expect(appWrapper.find('[data-role="show-more-link"]').exists()).toBeFalsy();
+    expect(appWrapper.find('[data-role="next-page-link"]').exists()).toBeFalsy();
   });
 
-  it('displays \'show more\' link if all items do not fit on one page', () => {
+  it('displays \'next page\' link if all items do not fit on one page', () => {
     props.page = {items: [], totalItems: PAGE_SIZE + 2, pageNumber: 0};
     const appWrapper = shallow(<App {...props} />);
-    const showMoreLink = appWrapper.find('[data-role="show-more-link"]');
+    const nextPageLink = appWrapper.find('[data-role="next-page-link"]');
 
-    expect(showMoreLink.exists()).toBeTruthy();
+    expect(nextPageLink.exists()).toBeTruthy();
   });
 
-  it('goes to next page if \'show more\' link was clicked', () => {
+  it('goes to next page if \'next page\' link was clicked', () => {
     props.page = {items: [], totalItems: PAGE_SIZE + 2, pageNumber: 0};
     const appWrapper = shallow(<App {...props} />);
-    const showMoreLink = appWrapper.find('[data-role="show-more-link"]');
-    showMoreLink.simulate('click');
+    const nextPageLink = appWrapper.find('[data-role="next-page-link"]');
+    nextPageLink.simulate('click');
 
     expect(props.applyFilter).toHaveBeenCalledWith(props.companyName, 1);
   });
 
-  it('stays on the same page if \'show more\' link was clicked and there are no more pages', () => {
+  it('hides \'next page\' link if we reached the last page', () => {
     props.page = {items: [], totalItems: PAGE_SIZE + 2, pageNumber: 1};
     const appWrapper = shallow(<App {...props} />);
-    const showMoreLink = appWrapper.find('[data-role="show-more-link"]');
-    showMoreLink.simulate('click');
+    const nextPageLink = appWrapper.find('[data-role="next-page-link"]');
+    expect(nextPageLink.exists()).toBeFalsy();
+  });
 
-    expect(props.applyFilter).not.toHaveBeenCalled();
+  it('hides \'prev page\' link if we are on the first page', () => {
+    const appWrapper = shallow(<App {...props} />);
+    expect(appWrapper.find('[data-role="prev-page-link"]').exists()).toBeFalsy();
+  });
+
+  it('displays \'prev page\' link if we are not on the first page', () => {
+    props.page = {items: [], totalItems: PAGE_SIZE + 2, pageNumber: 1};
+    const appWrapper = shallow(<App {...props} />);
+    expect(appWrapper.find('[data-role="prev-page-link"]').exists()).toBeTruthy();
+  });
+
+  it('goes to prev page if \'prev page\' link was clicked', () => {
+    props.page = {items: [], totalItems: PAGE_SIZE + 2, pageNumber: 1};
+    const appWrapper = shallow(<App {...props} />);
+    const prevPageLink = appWrapper.find('[data-role="prev-page-link"]');
+    prevPageLink.simulate('click');
+
+    expect(props.applyFilter).toHaveBeenCalledWith(props.companyName, 0);
   });
 
 });
