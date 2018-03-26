@@ -20,16 +20,18 @@ export const App = (props) => {
     applyFilter('', 0);
   };
 
-  const nextPage = () => {
-    const hasNextPage = (page.pageNumber + 1) * PAGE_SIZE < page.totalItems;
-    if (hasNextPage) {
+  const hasNextPage = () => (page.pageNumber + 1) * PAGE_SIZE < page.totalItems;
+
+  const nextPageClickHandler = () => {
+    if (hasNextPage()) {
       applyFilter(companyName, page.pageNumber + 1);
     }
   };
 
-  const prevPage = () => {
-    const hasPrevPage = page.pageNumber !== 0;
-    if (hasPrevPage) {
+  const hasPrevPage = () => page.pageNumber !== 0;
+
+  const prevPageClickHandler = () => {
+    if (hasPrevPage()) {
       applyFilter(companyName, page.pageNumber - 1);
     }
   };
@@ -50,12 +52,12 @@ export const App = (props) => {
       <CompanyList companies={page.items}/>
         <div className="showMoreContainer">
           {
-            page.pageNumber !== 0 &&
-            <a href="javascript:void(0);" onClick={prevPage} data-role="prev-page-link">Prev page</a>
+            hasPrevPage() &&
+            <a href="javascript:void(0);" onClick={prevPageClickHandler} data-role="prev-page-link">Prev page</a>
           }
           {
-            page.totalItems > PAGE_SIZE && page.pageNumber !== Math.floor(page.totalItems / PAGE_SIZE) &&
-            <a href="javascript:void(0);" onClick={nextPage} data-role="next-page-link">Next page</a>
+            hasNextPage() &&
+            <a href="javascript:void(0);" onClick={nextPageClickHandler} data-role="next-page-link">Next page</a>
           }
         </div>
     </div>

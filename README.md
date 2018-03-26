@@ -1,14 +1,29 @@
 # Acuris React front end test
 
+A React component where a user can type a company name which returns a filtered list of results, in groups of 5.
+
+![A wireframe of the Company search component](content/search-wireframe.jpg)
+
+## Acceptance criteria
+
+- Create an input box where a user can enter the name of a company
+- After the input of the 3rd character, render a filtered list of results which match the characters in the user input (there is an example json file with a sample set of results for you to work with)
+- When the user removes the text from the search box, no results will be displayed
+- When there are 2 characters or less in the search box, no results will be displayed
+- Create a clear button which, when clicked, will clear the user input
+- The rendered list will display results and associated metadata, as per wireframe
+- If there are more than 5 matching items, render a "next page" button – when this button is clicked, the next 5 items should be revealed
+- If the user is on the second page, display "prev page" button - when this button is clicked the previous 5 items should be revealed
+- "Prev page" button is hidden on the first page, "next page" button is hidden on the last page
+
 ## General comments
-* The project was initialised with create-react-app, which means all the build scripts are profided by react-scripts.
+* The project was initialised with create-react-app, which means all the build scripts are provided by react-scripts.
 * React-scripts do not provide support for the css pre-processors out of the box, so plain CSS was used for styling.
 * Some elements in the layout have 'data-role' attributes assigned to them. I've used this attribute to access the rendered data from the tests using Enzyme. In future these attributes can be used in automated acceptance tests build for example with Selenium.
 * Task description did not mention mobile devices and pixel-perfect layout, so no support for mobile devises is provided and no css normalization.
 
 ## Areas of improvement
 ### UI
-* Replace 'Show more' with an advanced version of paging. At the moment there is no way to go to previous page.
 * Do not use links for paging or consider adjusting eslint rules for the project, since a 'Script URL is a form of eval  no-script-url' warning is generated in console.
 * On page load put focus into filtering input
 * Provide special layout for mobile devices
